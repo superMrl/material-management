@@ -27,6 +27,7 @@ public class DruidConfig {
 
     //配置Druid的监控
     //1、配置管理后台的Servlet
+    //监控地址http://ip:prot/druid/
     @Bean
     public ServletRegistrationBean DruidServlet(){
         ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
