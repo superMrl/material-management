@@ -1,6 +1,11 @@
+spring:
+  profiles.active: local
+
+---
 server:
   port: 9091
 spring:
+  profiles: local
   datasource:
     #用户名
     username: root
@@ -38,7 +43,7 @@ spring:
     #最大启用PSCache的数量
     maxPoolPreparedStatementPerConnectionSize: 20
     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat,wall,log4j
+    filters: stat,wall
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
     #通过connectProperties属性来打开mergeSql功能；慢SQL记录
@@ -50,7 +55,10 @@ mybatis-plus:
       map-underscore-to-camel-case: true
       # 返回map时true:当查询数据为空时字段返回为null,false:不加这个查询数据为空时，字段将被隐藏
       #call-setters-on-nulls: true
-      # 打印SQL语句
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      # 打印SQL语句,日志已经打印
+      #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #设置xml文件位置
     mapper-locations: classpath*:/mapper/**/*.xml
+#日志文件
+logging:
+  config: classpath:logback-spring.xml
