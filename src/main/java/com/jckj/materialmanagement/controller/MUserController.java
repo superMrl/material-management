@@ -1,8 +1,8 @@
 package com.jckj.materialmanagement.controller;
 
 
-import com.jckj.materialmanagement.model.MUser;
-import com.jckj.materialmanagement.service.impl.MUserServiceImpl;
+import com.jckj.materialmanagement.model.User;
+import com.jckj.materialmanagement.service.UserService;
 import com.jckj.materialmanagement.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,14 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class MUserController {
 
     @Autowired
-    private MUserServiceImpl mUserService;
+    private RedisUtil redisUtil;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private UserService userService;
+
+
 
     @ApiOperation(value = "根据id获取用户",httpMethod = "POST")
     @RequestMapping("/get")
-    public String getUser(@RequestBody MUser user) {
+    public String getUser(@RequestBody User user) {
 
         String key = "k";
         redisUtil.set(key,"a");
