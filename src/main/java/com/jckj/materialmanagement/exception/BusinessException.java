@@ -7,24 +7,24 @@ import org.springframework.context.annotation.Bean;
 @Data
 public class BusinessException {
 
-    private String errorCode;
+    private String code;
 
-    private String errorMessage;
+    private String message;
 
     private Object[] params;
 
     public BusinessException(String code, String msg) {
-        this.errorCode = code;
-        this.errorMessage = msg;
+        this.code = code;
+        this.message = msg;
     }
 
     public BusinessException(String code) {
-        this.errorCode = code;
-        this.errorMessage = ErrorCodeProperties.init().getErrorMessage(code);
+        this.code = code;
+        this.message = ErrorCodeProperties.init().getErrorMessage(code);
     }
     public BusinessException(String code, Object[] params) {
-        this.errorCode = code;
-        this.errorMessage = ErrorCodeProperties.init().getErrorMessages(code, params);
+        this.code = code;
+        this.message = ErrorCodeProperties.init().getErrorMessages(code, params);
     }
 
 

@@ -13,4 +13,6 @@ import com.jckj.materialmanagement.model.User;
  */
 public interface UserService extends IService<User> {
 
+    User queryLoginUser(String telepbone);
+
 }

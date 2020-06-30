@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jckj.materialmanagement.mapper.UserMapper;
 import com.jckj.materialmanagement.model.User;
 import com.jckj.materialmanagement.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,4 +21,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+
+    @Resource
+    private  UserMapper userMapper;
+    /**
+     * 查询登录用户
+     * @param telepbone
+     * @return
+     */
+    @Override
+    public User queryLoginUser(String telepbone) {
+        return userMapper.selectByTelephone(telepbone);
+    }
 }
