@@ -1,10 +1,9 @@
 package com.jckj.materialmanagement.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Objects;
 import com.jckj.materialmanagement.model.MUser;
 import com.jckj.materialmanagement.service.impl.MUserServiceImpl;
+import com.jckj.materialmanagement.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +27,22 @@ public class MUserController {
     @Autowired
     private MUserServiceImpl mUserService;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @ApiOperation(value = "根据id获取用户",httpMethod = "POST")
     @RequestMapping("/get")
     public String getUser(@RequestBody MUser user) {
-        MUser db = mUserService.getUser(user.getId());
-        if(Objects.equal(db,null)){
-            return null;
-        }
-        return JSONObject.toJSONString(db);
+
+        String key = "k";
+        redisUtil.set(key,"a");
+
+//        MUser db = mUserService.getUser(user.getId());
+//        if(Objects.equal(db,null)){
+//            return null;
+//        }
+//        return JSONObject.toJSONString(db);
+        return null;
     }
     
 
