@@ -15,22 +15,22 @@ import org.springframework.context.annotation.Bean;
 @AllArgsConstructor
 public class BusinessException extends RuntimeException{
 
-    private Integer code;
+    private String code;
 
     private String message;
 
     private Object[] params;
 
-    public BusinessException(Integer code, String msg) {
+    public BusinessException(String code, String msg) {
         this.code = code;
         this.message = msg;
     }
 
-    public BusinessException(Integer code) {
+    public BusinessException(String code) {
         this.code = code;
         this.message = ErrorCodeProperties.init().getErrorMessage(code);
     }
-    public BusinessException(Integer code, Object[] params) {
+    public BusinessException(String code, Object[] params) {
         this.code = code;
         this.message = ErrorCodeProperties.init().getErrorMessages(code, params);
     }

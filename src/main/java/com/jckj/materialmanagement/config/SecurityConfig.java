@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,22 +49,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //基础设置
-        http.httpBasic()//配置HTTP基本身份验证
-                .and()
+//        http.httpBasic()//配置HTTP基本身份验证
+//                .and()
+//                .authorizeRequests()
+//                .anyRequest().authenticated()//所有请求都需要认证
+//                .and()
+//                .formLogin()
+////                .loginPage("/login")//登录页面url
+////                .usernameParameter("username")
+////                .passwordParameter("password")
+//                .loginProcessingUrl("/login")//登录验证url
+////                .defaultSuccessUrl("/index")//成功登录跳转
+//                .successHandler(loginSuccessHandler)//成功登录处理器
+//                .failureHandler(loginFailureHandler)//失败登录处理器
+//                .permitAll();//登录成功后有权限访问所有页面
+//        //关闭csrf跨域攻击防御
+//        http.csrf().disable()
+//                //基于token,不需要session
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
+        //关闭验证
+        http.csrf().disable()
                 .authorizeRequests()
-                .anyRequest().authenticated()//所有请求都需要认证
-                .and()
-                .formLogin()
-//                .loginPage("/login")//登录页面url
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-                .loginProcessingUrl("/login")//登录验证url
-//                .defaultSuccessUrl("/index")//成功登录跳转
-                .successHandler(loginSuccessHandler)//成功登录处理器
-                .failureHandler(loginFailureHandler)//失败登录处理器
-                .permitAll();//登录成功后有权限访问所有页面
-        //关闭csrf跨域攻击防御
-        http.csrf().disable();
+                .anyRequest().permitAll()
+                .and().logout().permitAll();
+
     }
 
     @Override

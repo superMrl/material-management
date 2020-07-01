@@ -28,18 +28,18 @@ public class ErrorCodeProperties {
 		return errorCodeProperties;
 	}
 
-	public static String getErrorMessage(Integer errorCode) {
+	public static String getErrorMessage(String errorCode) {
 		getErrorProperties();//临时设置
-		String errorMessage = messageSource.getMessage(errorCode.toString(), null, null);
+		String errorMessage = messageSource.getMessage(errorCode, null, null);
 		if (errorMessage != null) {
 			return errorMessage;
 		}
 		return "";
 	}
 
-	public static String getErrorMessages(Integer errorCode,Object[] obj) {
+	public static String getErrorMessages(String errorCode,Object[] obj) {
 		getErrorProperties();//临时设置
-		String errorMessage = messageSource.getMessage(errorCode.toString(), obj, null);
+		String errorMessage = messageSource.getMessage(errorCode, obj, null);
 		if (errorMessage != null) {
 			return errorMessage;
 		}

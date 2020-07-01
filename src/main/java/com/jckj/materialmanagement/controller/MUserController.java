@@ -1,6 +1,8 @@
 package com.jckj.materialmanagement.controller;
 
 
+import com.jckj.materialmanagement.config.error.ErrorCode;
+import com.jckj.materialmanagement.exception.BusinessException;
 import com.jckj.materialmanagement.model.User;
 import com.jckj.materialmanagement.service.UserService;
 import com.jckj.materialmanagement.utils.RedisUtil;
@@ -34,17 +36,10 @@ public class MUserController {
 
     @ApiOperation(value = "根据id获取用户",httpMethod = "POST")
     @RequestMapping("/get")
-    public String getUser(@RequestBody User user) {
+    public User getUser(@RequestBody User user) {
 
-        String key = "k";
-        redisUtil.set(key,"a");
-
-//        MUser db = mUserService.getUser(user.getId());
-//        if(Objects.equal(db,null)){
-//            return null;
-//        }
-//        return JSONObject.toJSONString(db);
-        return null;
+//        throw new BusinessException(ErrorCode.FAILED);
+       return user;
     }
     
 

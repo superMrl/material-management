@@ -17,7 +17,7 @@ public class GlobalResponse<T> {
 
     protected boolean success = false;
     private T data;
-    private Integer code;
+    private String code;
     private String msg;
 
     public GlobalResponse(T data, boolean success) {
@@ -29,7 +29,7 @@ public class GlobalResponse<T> {
         return new GlobalResponse<>(data, true);
     }
 
-    public static <T> GlobalResponse<T> fail(String msg, Integer code) {
+    public static <T> GlobalResponse<T> fail(String msg, String code) {
         GlobalResponse<T> resp = new GlobalResponse<T>();
         resp.setCode(code);
         resp.setMsg(msg);
