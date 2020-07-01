@@ -1,6 +1,8 @@
 package com.jckj.materialmanagement.config.response;
 
 
+import com.jckj.materialmanagement.config.error.ErrorCode;
+import com.jckj.materialmanagement.config.error.ErrorCodeProperties;
 import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +22,23 @@ public class GlobalResponse<T> {
     private String code;
     private String msg;
 
-    public GlobalResponse(T data, boolean success) {
+    public GlobalResponse(T data, String code, String msg, boolean success) {
         this.success = success;
         this.data = data;
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public static <T> GlobalResponse<T> success() {
+        return new GlobalResponse<>(null, ErrorCode.SUCCESS, ErrorCodeProperties.init().getErrorMessage(ErrorCode.SUCCESS), true);
+    }
+
+    public static <T> GlobalResponse<T> success(String code) {
+        return new GlobalResponse<>(null, code, ErrorCodeProperties.init().getErrorMessage(code), true);
     }
 
     public static <T> GlobalResponse<T> success(T data) {
-        return new GlobalResponse<>(data, true);
+        return new GlobalResponse<>(data, ErrorCode.SUCCESS, ErrorCodeProperties.init().getErrorMessage(ErrorCode.SUCCESS), true);
     }
 
     public static <T> GlobalResponse<T> fail(String msg, String code) {

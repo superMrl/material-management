@@ -29,7 +29,6 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "主键")
     @TableId(value = "ID", type = IdType.AUTO)
     private Long id;
