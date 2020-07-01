@@ -38,6 +38,8 @@ public class MUserController {
     @RequestMapping("/get")
     public User getUser(@RequestBody User user) {
 
+
+
 //        throw new BusinessException(ErrorCode.FAILED);
        return user;
     }
