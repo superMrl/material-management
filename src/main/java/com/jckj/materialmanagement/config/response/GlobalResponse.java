@@ -41,10 +41,22 @@ public class GlobalResponse<T> {
         return new GlobalResponse<>(data, ErrorCode.SUCCESS, ErrorCodeProperties.init().getErrorMessage(ErrorCode.SUCCESS), true);
     }
 
-    public static <T> GlobalResponse<T> fail(String msg, String code) {
+    public static <T> GlobalResponse<T> success(String code,T data) {
+        return new GlobalResponse<>(data, code, ErrorCodeProperties.init().getErrorMessage(code), true);
+    }
+
+    public static <T> GlobalResponse<T> fail(String code,String msg) {
         GlobalResponse<T> resp = new GlobalResponse<T>();
         resp.setCode(code);
         resp.setMsg(msg);
+        resp.setSuccess(false);
+        return resp;
+    }
+
+    public static <T> GlobalResponse<T> fail(String code) {
+        GlobalResponse<T> resp = new GlobalResponse<T>();
+        resp.setCode(code);
+        resp.setMsg(ErrorCodeProperties.init().getErrorMessage(code));
         resp.setSuccess(false);
         return resp;
     }

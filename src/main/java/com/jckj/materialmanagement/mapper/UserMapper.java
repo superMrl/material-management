@@ -16,5 +16,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
-    User selectByTelephone(@Param(value = "telepbone") String telepbone);
+    User selectByTelephone(@Param(value = "telPhone") String telPhone);
+
+    User selectLoginUserByTp(@Param(value = "telPhone")String telPhone, @Param(value = "userPassword")String userPassword);
 }

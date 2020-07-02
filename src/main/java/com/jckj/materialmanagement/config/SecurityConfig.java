@@ -38,9 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private LoginFailureHandler loginFailureHandler;
 
-    //yan
-    String salt = "a1b1c1";
-
     /**
      * 权限核心配置
      * @param http

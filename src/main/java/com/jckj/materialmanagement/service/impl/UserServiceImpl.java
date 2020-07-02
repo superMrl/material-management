@@ -2,6 +2,7 @@ package com.jckj.materialmanagement.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import com.google.common.base.Optional;
 import com.jckj.materialmanagement.config.error.ErrorCode;
 import com.jckj.materialmanagement.config.response.GlobalResponse;
 import com.jckj.materialmanagement.exception.BusinessException;
@@ -20,20 +21,22 @@ import java.util.Objects;
  * 用户表 服务实现类
  * </p>
  *
- * @author 
+ * @author
  * @since 2020-06-30
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService{
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
 
     @Resource
     private PasswordEncoder passwordEncoder;
     @Resource
-    private  UserMapper userMapper;
+    private UserMapper userMapper;
+
 
     /**
      * 查询登录用户
+     *
      * @param telepbone
      * @return
      */
@@ -44,22 +47,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 注册用户
+     *
      * @param user
      * @return
      */
     @Override
     public GlobalResponse register(User user) {
         User userDB = userMapper.selectByTelephone(user.getTelPhone());
-        if (!Objects.equals(userDB, null)) {
+        if (Optional.fromNullable(userDB).isPresent()) {
             throw new BusinessException(ErrorCode.USER_TELEPHONE_HAS_REGISTER);
         }
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         int insert = userMapper.insert(user);
-        if(insert < 0){
+        if (insert < 0) {
             throw new BusinessException(ErrorCode.USER_REGISTER_FAIL);
         }
         return GlobalResponse.success();
     }
+
+    @Override
+    public User queryLoginUserByTp(String telPhone, String userPassword) {
+        userPassword = passwordEncoder.encode(userPassword);
+        return userMapper.selectLoginUserByTp(telPhone, userPassword);
+
+
+    }
+
 
 
 }

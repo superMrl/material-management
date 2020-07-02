@@ -17,4 +17,7 @@ public interface UserService extends IService<User>{
     User queryLoginUser(String telepbone);
 
     GlobalResponse register(User user);
+
+    User queryLoginUserByTp(String telPhone, String userPassword);
+
 }

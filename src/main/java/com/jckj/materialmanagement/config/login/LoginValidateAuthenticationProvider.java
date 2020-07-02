@@ -1,6 +1,7 @@
 package com.jckj.materialmanagement.config.login;
 
 
+import com.google.common.base.Optional;
 import com.jckj.materialmanagement.model.User;
 import com.jckj.materialmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class LoginValidateAuthenticationProvider implements AuthenticationProvid
         String rawPassword = (String) authentication.getCredentials();
         //查询用户是否存在
         User user = userService.queryLoginUser(username);
-        if (Objects.equals(user, null)) {
+        if (Optional.fromNullable(user).isPresent()) {
             throw new DisabledException("用户不存在,请先注册!");
         }
         //先不设置token,后期增加
