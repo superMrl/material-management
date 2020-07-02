@@ -50,7 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public GlobalResponse register(User user) {
         User userDB = userMapper.selectByTelephone(user.getTelPhone());
-        if(!Objects.equals(null,userDB)){
+        if (!Objects.equals(userDB, null)) {
             throw new BusinessException(ErrorCode.USER_TELEPHONE_HAS_REGISTER);
         }
         user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));

@@ -23,7 +23,7 @@ spring:
     #密码
     password: jq@qwer
     #数据库的url
-    url: jdbc:mysql://49.232.127.208:10246/material?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://49.232.127.208:10246/material?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     #驱动名称
     driver-class-name: com.mysql.cj.jdbc.Driver
     #对象的类型，这里是druid数据源
