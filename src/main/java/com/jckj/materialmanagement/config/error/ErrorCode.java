@@ -13,6 +13,8 @@ public class ErrorCode {
     public static final String USER_TELEPHONE_HAS_REGISTER = "001";
     public static final String USER_REGISTER_FAIL = "002";
 
-
+    //入库code码
+    public static final String INSTORE_SAVE_SUCCESS = "100";
+    public static final String INSTORE_SAVE_FAIL = "101";
 
 }
