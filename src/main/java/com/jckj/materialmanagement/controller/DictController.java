@@ -56,5 +56,11 @@ public class DictController {
         return iDictService.saveDict(dict);
     }
 
+    @ApiOperation(value = "删除字典", httpMethod = "POST")
+    @RequestMapping("/del")
+    public GlobalResponse delDict(@RequestBody Dict dict) {
+        return iDictService.delDict(dict);
+    }
+
 
 }

@@ -22,4 +22,6 @@ public interface IDictService extends IService<Dict> {
     List<Dict> queryDictListByType(String type);
 
     GlobalResponse saveDict(Dict dict);
+
+    GlobalResponse delDict(Dict dict);
 }

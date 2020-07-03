@@ -69,7 +69,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
     @ExceptionHandler({BusinessException.class})
     public <T> GlobalResponse<T> handleException(BusinessException e){
         log.error(Throwables.getStackTraceAsString(e));
-        return GlobalResponse.fail(e.getMessage(),e.getCode());
+        return GlobalResponse.fail(e.getCode(),e.getMessage());
     }
 
     //统一异常处理

@@ -93,4 +93,17 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         }
         return GlobalResponse.success();
     }
+
+    @Override
+    public GlobalResponse delDict(Dict dict) {
+        Dict db = dictMapper.selectById(dict.getId());
+        if(ComUtil.isNull(db)){
+            throw new BusinessException(ErrorCode.DATA_NOT_FIND);
+        }
+        int del = dictMapper.deleteById(dict.getId());
+        if(del < 0){
+            throw new BusinessException(ErrorCode.DATA_DEL_FAIL);
+        }
+        return GlobalResponse.success();
+    }
 }
