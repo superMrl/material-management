@@ -9,6 +9,7 @@ import com.jckj.materialmanagement.model.InStorageInfo;
 import com.jckj.materialmanagement.mapper.InStorageInfoMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jckj.materialmanagement.service.InStorageInfoService;
+import com.jckj.materialmanagement.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,7 +39,7 @@ public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, I
         for (InStorageInfo inStorageInfo : inStorageInfoList) {
             String timeId = IdWorker.getMillisecond();
             inStorageInfo.setInPageNo(timeId);
-            inStorageInfo.setInsertTime(LocalDateTime.now());
+//            inStorageInfo.setInsertTime(LocalDateTime.now());
         }
         boolean flag = this.saveBatch(inStorageInfoList);
         if(!flag){
@@ -49,8 +50,8 @@ public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, I
 
     @Override
     public List<InStorageInfo> selectTodayInStore() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String insertTime = dateFormat.format(new Date());
+
+        String insertTime = DateUtils.formatDateToDB(DateUtils.parseMinTimeForDate(DateUtils.getCurrentDay()).toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN);
         return inStorageInfoMapper.selectTodayInStore(insertTime);
     }
 }

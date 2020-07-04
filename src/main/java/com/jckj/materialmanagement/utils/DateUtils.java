@@ -1159,15 +1159,4 @@ public class DateUtils {
         }
         return days;
     }
-
-
-    public static Timestamp getMinTimeOfDay(Long date) {
-        Long min = parseMinTimeForDate(date);
-        return Timestamp.valueOf(DateUtils.formatDateToDB(min.toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN));
-    }
-
-    public static Timestamp getMaxTimeOfDay(Long date) {
-        Long max = parseMaxTimeForDate(date);
-        return Timestamp.valueOf(formatDateToDB(max.toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN));
-    }
 }

@@ -74,7 +74,7 @@ public class InStorageInfo implements Serializable {
 
     @ApiModelProperty(value = "入库时间")
     @TableField("INSERT_TIME")
-    private LocalDateTime insertTime;
+    private String insertTime;
 
 
 }

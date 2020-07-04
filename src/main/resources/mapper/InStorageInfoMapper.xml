@@ -3,7 +3,7 @@
 <mapper namespace="com.jckj.materialmanagement.mapper.InStorageInfoMapper">
 
     <select id="selectTodayInStore" resultType="com.jckj.materialmanagement.model.InStorageInfo">
-        SELECT * FROM `m_in_storage_info` WHERE INSERT_TIME <![CDATA[ >= ]]>str_to_date(#{insertTime,jdbcType=VARCHAR}, '%Y-%m-%d') ;
+        SELECT * FROM `m_in_storage_info` WHERE INSERT_TIME &gt;=#{insertTime}
     </select>
 
 </mapper>
