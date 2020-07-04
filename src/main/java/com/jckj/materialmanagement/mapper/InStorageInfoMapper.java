@@ -2,6 +2,10 @@ package com.jckj.materialmanagement.mapper;
 
 import com.jckj.materialmanagement.model.InStorageInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.sql.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface InStorageInfoMapper extends BaseMapper<InStorageInfo> {
 
+    List<InStorageInfo> selectTodayInStore(@Param(value = "insertTime") String insertTime);
 }

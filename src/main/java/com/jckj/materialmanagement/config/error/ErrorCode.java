@@ -23,6 +23,7 @@ public class ErrorCode {
     //入库code码
     public static final String INSTORE_SAVE_SUCCESS = "100";
     public static final String INSTORE_SAVE_FAIL = "101";
+    public static final String INSTORE_SELECT_SUCCESS = "102";
 
 
     //字典code

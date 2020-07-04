@@ -4,6 +4,8 @@ import com.jckj.materialmanagement.config.response.GlobalResponse;
 import com.jckj.materialmanagement.model.InStorageInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 入库表 服务类
@@ -15,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface InStorageInfoService extends IService<InStorageInfo> {
 
     GlobalResponse saveBatch(String param);
+
+    List<InStorageInfo> selectTodayInStore();
 }

@@ -11,6 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jckj.materialmanagement.service.InStorageInfoService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +29,9 @@ import java.util.List;
 @Service
 public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, InStorageInfo> implements InStorageInfoService {
 
+    @Resource
+    private InStorageInfoMapper inStorageInfoMapper;
+
     @Override
     public GlobalResponse saveBatch(String param) {
         List<InStorageInfo> inStorageInfoList = JSONArray.parseArray(param, InStorageInfo.class);
@@ -39,5 +45,12 @@ public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, I
             throw new BusinessException(ErrorCode.INSTORE_SAVE_FAIL);
         }
         return  GlobalResponse.success(ErrorCode.INSTORE_SAVE_SUCCESS);
+    }
+
+    @Override
+    public List<InStorageInfo> selectTodayInStore() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String insertTime = dateFormat.format(new Date());
+        return inStorageInfoMapper.selectTodayInStore(insertTime);
     }
 }
