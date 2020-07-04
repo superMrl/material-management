@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface DictMapper extends BaseMapper<Dict> {
 
-    List<Dict> selectDictListByType(@Param(value = "type") String type);
+    List<Dict> selectDictListByType(@Param(value = "types") List<String> types,@Param(value = "companyId")Long companyId);
 }

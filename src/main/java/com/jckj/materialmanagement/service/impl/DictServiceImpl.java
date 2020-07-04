@@ -48,7 +48,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
 
     @Override
     public List<Dict> queryDictListByType(String type) {
-        return dictMapper.selectDictListByType(type);
+        return dictMapper.selectDictListByType(Lists.newArrayList(type),0l);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         }
 
         Dict db = null;
-        List<Dict> dicts = dictMapper.selectDictListByType(dict.getType());
+        List<Dict> dicts = dictMapper.selectDictListByType(Lists.newArrayList(dict.getType()),0l);
         if(!CollectionUtils.isEmpty(dicts)){
             for (Dict temp : dicts) {
                 if(!ComUtil.isNull(temp.getId()) && temp.getId().equals(dict.getId())){
@@ -69,12 +69,12 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
                     continue;
                 }
                 if(dict.getName().equals(temp.getName())){
-                    throw new BusinessException(ErrorCode.DICT_NAME_EXIST);
+                    throw new BusinessException(ErrorCode.DATA_NAME_EXIST,new Object[]{temp.getName()});
                 }
             }
         }
         if(!ComUtil.isNull(dict.getId()) && ComUtil.isNull(db)){
-            throw new BusinessException(ErrorCode.DICT_NOT_FIND);
+            throw new BusinessException(ErrorCode.DATA_NOT_FIND);
         }
 
         if(ComUtil.isNull(dict.getId())){

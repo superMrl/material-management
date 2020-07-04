@@ -3,6 +3,9 @@
 <mapper namespace="com.jckj.materialmanagement.mapper.DictMapper">
 
     <select id="selectDictListByType" resultType="com.jckj.materialmanagement.model.Dict">
-        SELECT ID,`NAME`,TYPE FROM `m_dict` where type = #{type}
+        SELECT * FROM `m_dict` where COMPANY_ID = 0 and TYPE in
+        <foreach collection="types" item="type" open="(" close=")" separator=",">
+            #{type}
+        </foreach>
     </select>
 </mapper>

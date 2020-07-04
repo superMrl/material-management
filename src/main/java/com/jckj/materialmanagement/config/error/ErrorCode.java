@@ -12,6 +12,9 @@ public class ErrorCode {
     public static final String DATA_SAVE_FAIL = "997";
     public static final String DATA_UPDATE_FAIL = "996";
     public static final String DATA_DEL_FAIL = "995";
+    public static final String DATA_NAME_EXIST = "994";
+    public static final String NUM_OF_DATA_ERROR = "993";//{0}对应的数值格式错误
+
 
 
     public static final String USER_TELEPHONE_HAS_REGISTER = "001";
@@ -29,7 +32,9 @@ public class ErrorCode {
     //字典code
     public static final String DICT_TYPE_ERROR= "201";
     public static final String DICT_NAME_EMPTY= "202";
-    public static final String DICT_NAME_EXIST= "203";
-    public static final String DICT_NOT_FIND= "204";
+    public static final String DICT_ID_NOT_FIND= "203";//{0}对应的字典数据不存在
+
+    //物资code
+
 
 }
