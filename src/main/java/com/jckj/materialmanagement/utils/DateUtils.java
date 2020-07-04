@@ -5,6 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -139,14 +140,15 @@ public class DateUtils {
 
     /**
      * 获取当前月份的指定日期
+     *
      * @param day
      * @return 格式:yyyyMMdd
      */
-    public static Long getThisDate(String day){
+    public static Long getThisDate(String day) {
         if (day.length() < 2) {
-            return Long.parseLong(getThisMonth().toString()+"0"+day);
-        }else {
-            return Long.parseLong(getThisMonth().toString()+day);
+            return Long.parseLong(getThisMonth().toString() + "0" + day);
+        } else {
+            return Long.parseLong(getThisMonth().toString() + day);
         }
     }
 
@@ -407,11 +409,12 @@ public class DateUtils {
 
     /**
      * 将yyyyMMdd转换为yyyy年MM月dd日
+     *
      * @param date
      * @return
      */
     public static String parseDate2YMD(String date) {
-        return DateUtils.formatDateToDB(date, DateUtils.DATE_REQ_PATTERN, DateUtils.TIME_SHOW_PATTERN).substring(0,11);
+        return DateUtils.formatDateToDB(date, DateUtils.DATE_REQ_PATTERN, DateUtils.TIME_SHOW_PATTERN).substring(0, 11);
     }
 
     public static String formatTimeToDB(String dateStr) {
@@ -793,6 +796,7 @@ public class DateUtils {
 
     /**
      * 当前日期累加月份值.
+     *
      * @param currentDate
      * @param month
      * @return
@@ -811,6 +815,7 @@ public class DateUtils {
     /**
      * 当前日期累加减月份值.
      * 格式进行判断输出
+     *
      * @param date yyyyMMdd / yyyyMM / yyyy
      * @param as
      * @return
@@ -819,22 +824,22 @@ public class DateUtils {
         Calendar calendar = Calendar.getInstance();
         String d = date.toString();
         String format = null;
-        if(d.length() == 4){
+        if (d.length() == 4) {
             calendar.setTime(DateUtils.formatStr2Date(d, DateUtils.DATE_REQ_PATTERNYEAR));
             calendar.add(Calendar.YEAR, as);
             format = DateUtils.DATE_REQ_PATTERNYEAR;
         }
-        if(d.length() == 6){
+        if (d.length() == 6) {
             calendar.setTime(DateUtils.formatStr2Date(d, DateUtils.DATE_REQ_PATTERNs));
             calendar.add(Calendar.MONTH, as);
             format = DateUtils.DATE_REQ_PATTERNs;
         }
-        if (d.length() == 8){
+        if (d.length() == 8) {
             calendar.setTime(DateUtils.formatStr2Date(d, DateUtils.DATE_REQ_PATTERN));
             calendar.add(Calendar.DATE, as);
             format = DateUtils.DATE_REQ_PATTERN;
         }
-        return DateUtils.formatDateTime(calendar.getTime(),format);
+        return DateUtils.formatDateTime(calendar.getTime(), format);
     }
 
 
@@ -921,6 +926,7 @@ public class DateUtils {
 
     /**
      * 获取当前日(yyyyMMdd格式)
+     *
      * @return
      */
     public static Long getCurrentDay() {
@@ -930,6 +936,7 @@ public class DateUtils {
 
     /**
      * 获取当前日之前N天(yyyyMMdd格式)
+     *
      * @return
      */
     public static Long getDayBeforeCurrentDay(int days) {
@@ -940,6 +947,7 @@ public class DateUtils {
 
     /**
      * 获取当前日之前N天(yyyyMMdd格式)
+     *
      * @return
      */
     public static Long getLastDayOfNextMonth() {
@@ -951,6 +959,7 @@ public class DateUtils {
 
     /**
      * 日期格式转换为UNIX时间戳
+     *
      * @param timestamp
      * @return
      * @throws ParseException
@@ -959,10 +968,10 @@ public class DateUtils {
         String str = null;
 
         try {
-            SimpleDateFormat date_time=new SimpleDateFormat(format);
-            Date date=date_time.parse(timestamp);
-            long ts=date.getTime();
-            str=String.valueOf(ts/1000);
+            SimpleDateFormat date_time = new SimpleDateFormat(format);
+            Date date = date_time.parse(timestamp);
+            long ts = date.getTime();
+            str = String.valueOf(ts / 1000);
 
         } catch (Exception e) {
 
@@ -1024,6 +1033,7 @@ public class DateUtils {
 
     /**
      * 获取当前日期的下个月1日
+     *
      * @param value
      * @return
      */
@@ -1040,20 +1050,21 @@ public class DateUtils {
 
     /**
      * 获取指定月 法定假期天数
-     * @param month 201907
+     *
+     * @param month    201907
      * @param holidays redis中一年的假期集合,逗号分隔,从redis中获取的值
      * @return
      */
     public static Integer getLegalHolidaysMonth(Long month, String holidays) {
         Integer num = 0;
-        if(Strings.isNullOrEmpty(holidays)){
+        if (Strings.isNullOrEmpty(holidays)) {
             return num;
         }
         Long min = getMinDateInMonth(month);
         Long max = getMaxDateInMonth(month);
         List<Long> temps = Arrays.stream(holidays.split(",")).map(Long::valueOf).collect(Collectors.toList());
         for (Long t : temps) {
-            if(t.compareTo(min) >= 0 && t.compareTo(max) <= 0){
+            if (t.compareTo(min) >= 0 && t.compareTo(max) <= 0) {
                 num++;
             }
         }
@@ -1062,6 +1073,7 @@ public class DateUtils {
 
     /**
      * 获取一年的所有月份
+     *
      * @param year 2019
      * @return 201901~201912
      */
@@ -1077,6 +1089,7 @@ public class DateUtils {
 
     /**
      * 获取一段时间内闰年的个数
+     *
      * @param startDate
      * @param endDate
      * @return
@@ -1110,15 +1123,16 @@ public class DateUtils {
 
     /**
      * 判定是否是闰年
+     *
      * @param year
      * @return
      */
     public static boolean validateLeapYear(int year) {
-        if(year < 0 || year > 3000){
+        if (year < 0 || year > 3000) {
             return false;
         }
 
-        if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
+        if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             return true;
         }
 
@@ -1144,5 +1158,16 @@ public class DateUtils {
             }
         }
         return days;
+    }
+
+
+    public static Timestamp getMinTimeOfDay(Long date) {
+        Long min = parseMinTimeForDate(date);
+        return Timestamp.valueOf(DateUtils.formatDateToDB(min.toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN));
+    }
+
+    public static Timestamp getMaxTimeOfDay(Long date) {
+        Long max = parseMaxTimeForDate(date);
+        return Timestamp.valueOf(formatDateToDB(max.toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN));
     }
 }
