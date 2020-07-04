@@ -21,4 +21,6 @@ public interface IMaterialInfoService extends IService<MaterialInfo> {
     GlobalResponse saveMaterialInfo(MaterialInfo info);
 
     GlobalResponse delMaterialInfo(MaterialInfo info);
+
+    MaterialInfo queryMaterialInfo(MaterialInfo info);
 }

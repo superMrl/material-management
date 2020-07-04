@@ -6,6 +6,7 @@ import com.jckj.materialmanagement.config.response.GlobalResponse;
 import com.jckj.materialmanagement.model.Dict;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,4 +25,6 @@ public interface IDictService extends IService<Dict> {
     GlobalResponse saveDict(Dict dict);
 
     GlobalResponse delDict(Dict dict);
+
+    Map<String, Map<Long, Dict>> queryDict4Material();
 }

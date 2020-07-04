@@ -151,4 +151,18 @@ public class MaterialInfoServiceImpl extends ServiceImpl<MaterialInfoMapper, Mat
         }
         return GlobalResponse.success();
     }
+
+    /**
+     * 物资详情
+     * @param info
+     * @return
+     */
+    @Override
+    public MaterialInfo queryMaterialInfo(MaterialInfo info) {
+        MaterialInfo materialInfo = materialInfoMapper.selectById(info.getMaterialSerialNo());
+        if(ComUtil.isNull(materialInfo)){
+            throw new BusinessException(ErrorCode.DATA_NOT_FIND);
+        }
+        return materialInfo;
+    }
 }

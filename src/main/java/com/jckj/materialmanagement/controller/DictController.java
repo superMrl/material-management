@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -62,5 +63,11 @@ public class DictController {
         return iDictService.delDict(dict);
     }
 
+
+    @ApiOperation(value = "获取物资对应的字典数据", httpMethod = "POST")
+    @RequestMapping("/material")
+    public Map<String, Map<Long,Dict>> queryDict4Material() {
+        return iDictService.queryDict4Material();
+    }
 
 }

@@ -51,6 +51,13 @@ public class MaterialInfoController {
         return iMaterialInfoService.saveMaterialInfo(info);
     }
 
+    @ApiOperation(value = "保存物资信息", httpMethod = "POST")
+    @RequestMapping("/detail")
+    public MaterialInfo queryMaterialInfo(@RequestBody MaterialInfo info) {
+        return iMaterialInfoService.queryMaterialInfo(info);
+    }
+
+
     @ApiOperation(value = "删除物资信息", httpMethod = "POST")
     @RequestMapping("/del")
     public GlobalResponse delMaterialInfo(@RequestBody MaterialInfo info) {
