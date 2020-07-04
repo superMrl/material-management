@@ -39,5 +39,9 @@ public class Dict implements Serializable {
     @TableField("TYPE")
     private String type;
 
+    @ApiModelProperty(value = "商户id")
+    @TableField("COMPANY_ID")
+    private Long companyId;
+
 
 }

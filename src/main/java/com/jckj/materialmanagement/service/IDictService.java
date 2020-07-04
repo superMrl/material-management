@@ -26,5 +26,5 @@ public interface IDictService extends IService<Dict> {
 
     GlobalResponse delDict(Dict dict);
 
-    Map<String, Map<Long, Dict>> queryDict4Material();
+    Map<String, Map<Long, Dict>> queryDict4Material(Long companyId);
 }

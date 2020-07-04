@@ -3,7 +3,6 @@ package com.jckj.materialmanagement.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Strings;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jckj.materialmanagement.config.error.ErrorCode;
@@ -14,7 +13,6 @@ import com.jckj.materialmanagement.mapper.DictMapper;
 import com.jckj.materialmanagement.model.Dict;
 import com.jckj.materialmanagement.service.IDictService;
 import com.jckj.materialmanagement.utils.ComUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -110,9 +108,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     }
 
     @Override
-    public Map<String, Map<Long, Dict>> queryDict4Material() {
+    public Map<String, Map<Long, Dict>> queryDict4Material(Long companyId) {
         List<String> allTypes = DictType.getAllTypes();
-        List<Dict> dicts = dictMapper.selectDictListByType(allTypes, 0l);
+        List<Dict> dicts = dictMapper.selectDictListByType(allTypes, companyId);
         if (CollectionUtils.isEmpty(dicts)) {
             return null;
         }

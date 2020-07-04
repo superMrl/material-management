@@ -66,8 +66,8 @@ public class DictController {
 
     @ApiOperation(value = "获取物资对应的字典数据", httpMethod = "POST")
     @RequestMapping("/material")
-    public Map<String, Map<Long,Dict>> queryDict4Material() {
-        return iDictService.queryDict4Material();
+    public Map<String, Map<Long,Dict>> queryDict4Material(@RequestBody Dict dict) {
+        return iDictService.queryDict4Material(dict.getCompanyId());
     }
 
 }

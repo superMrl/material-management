@@ -41,8 +41,8 @@ public class MaterialInfoController {
 
     @ApiOperation(value = "获取所有的物资", httpMethod = "POST")
     @RequestMapping("/list")
-    public List<MaterialInfo> queryMaterialInfoList(@RequestBody Long companyId) {
-        return iMaterialInfoService.queryMaterialInfoList(companyId);
+    public List<MaterialInfo> queryMaterialInfoList(@RequestBody MaterialInfo info) {
+        return iMaterialInfoService.queryMaterialInfoList(info.getCompanyId());
     }
 
     @ApiOperation(value = "保存物资信息", httpMethod = "POST")
