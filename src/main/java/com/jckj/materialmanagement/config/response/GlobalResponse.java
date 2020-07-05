@@ -1,12 +1,15 @@
 package com.jckj.materialmanagement.config.response;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jckj.materialmanagement.config.error.ErrorCode;
 import com.jckj.materialmanagement.config.error.ErrorCodeProperties;
 import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * http/https通用返回值
@@ -15,12 +18,13 @@ import lombok.ToString;
 @Data
 @ToString
 @NoArgsConstructor
-public class GlobalResponse<T> {
+public class GlobalResponse<T> implements Serializable{
 
     protected boolean success = false;
     private T data;
     private String code;
     private String msg;
+    private Integer totalSize;
 
     public GlobalResponse(T data, String code, String msg, boolean success) {
         this.success = success;
@@ -43,6 +47,12 @@ public class GlobalResponse<T> {
 
     public static <T> GlobalResponse<T> success(String code,T data) {
         return new GlobalResponse<>(data, code, ErrorCodeProperties.init().getErrorMessage(code), true);
+    }
+
+    public static <T> GlobalResponse<T> success(Integer totalSize,T data) {
+        GlobalResponse<T> res = GlobalResponse.success(data);
+        res.setTotalSize(totalSize);
+        return res;
     }
 
     public static <T> GlobalResponse<T> fail(String code,String msg) {

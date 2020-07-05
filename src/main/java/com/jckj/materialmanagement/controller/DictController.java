@@ -1,6 +1,7 @@
 package com.jckj.materialmanagement.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.jckj.materialmanagement.config.response.GlobalResponse;
 import com.jckj.materialmanagement.model.Dict;
 import com.jckj.materialmanagement.model.User;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -41,13 +43,13 @@ public class DictController {
 
     @ApiOperation(value = "获取字典所有类型", httpMethod = "POST")
     @RequestMapping("/type/list")
-    public List<Dict> queryDictTypeList() {
+    public GlobalResponse queryDictTypeList() {
         return iDictService.queryDictTypeList();
     }
 
     @ApiOperation(value = "获取指定type字典列表", httpMethod = "POST")
     @RequestMapping("/list")
-    public List<Dict> queryDictList(@RequestBody Dict dict) {
+    public GlobalResponse queryDictList(@RequestBody Dict dict) {
         return iDictService.queryDictListByType(dict.getType());
     }
 
@@ -66,7 +68,7 @@ public class DictController {
 
     @ApiOperation(value = "获取物资对应的字典数据", httpMethod = "POST")
     @RequestMapping("/material")
-    public Map<String, Map<Long,Dict>> queryDict4Material(@RequestBody Dict dict) {
+    public GlobalResponse queryDict4Material(@RequestBody Dict dict) {
         return iDictService.queryDict4Material(dict.getCompanyId());
     }
 

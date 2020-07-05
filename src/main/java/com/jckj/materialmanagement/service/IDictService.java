@@ -18,13 +18,13 @@ import java.util.Map;
  */
 public interface IDictService extends IService<Dict> {
 
-    List<Dict> queryDictTypeList();
+    GlobalResponse queryDictTypeList();
 
-    List<Dict> queryDictListByType(String type);
+    GlobalResponse queryDictListByType(String type);
 
     GlobalResponse saveDict(Dict dict);
 
     GlobalResponse delDict(Dict dict);
 
-    Map<String, Map<Long, Dict>> queryDict4Material(Long companyId);
+    GlobalResponse queryDict4Material(Long companyId);
 }

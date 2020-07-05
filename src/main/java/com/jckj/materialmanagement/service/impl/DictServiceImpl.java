@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     private DictMapper dictMapper;
 
     @Override
-    public List<Dict> queryDictTypeList() {
+    public GlobalResponse queryDictTypeList() {
         List<Dict> dicts = Lists.newArrayList();
         for (DictType temp : DictType.values()) {
             Dict d = new Dict();
@@ -43,12 +44,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
             d.setName(temp.text);
             dicts.add(d);
         }
-        return dicts;
+        return GlobalResponse.success(dicts);
     }
 
     @Override
-    public List<Dict> queryDictListByType(String type) {
-        return dictMapper.selectDictListByType(Lists.newArrayList(type), 0l);
+    public GlobalResponse queryDictListByType(String type) {
+        List<Dict> dicts = dictMapper.selectDictListByType(Lists.newArrayList(type), 0l);
+        return GlobalResponse.success(dicts);
     }
 
     @Override
@@ -108,25 +110,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     }
 
     @Override
-    public Map<String, Map<Long, Dict>> queryDict4Material(Long companyId) {
+    public GlobalResponse queryDict4Material(Long companyId) {
         List<String> allTypes = DictType.getAllTypes();
         List<Dict> dicts = dictMapper.selectDictListByType(allTypes, companyId);
         if (CollectionUtils.isEmpty(dicts)) {
-            return null;
+            return GlobalResponse.success();
         }
-        Map<String, Map<Long, Dict>> dicMap = Maps.newHashMap();
-        if (!CollectionUtils.isEmpty(dicts)) {
-            for (Dict dict : dicts) {
-                Map<Long, Dict> map = dicMap.get(dict.getType());
-                if (CollectionUtils.isEmpty(map)) {
-                    map = Maps.newHashMap();
-                    dicMap.put(dict.getType(), map);
-                }
-                if (ComUtil.isNull(map.get(dict.getId()))) {
-                    map.put(dict.getId(), dict);
-                }
-            }
-        }
-        return dicMap;
+        Map<String, List<Dict>> map = dicts.stream().collect(Collectors.groupingBy(Dict::getType));
+        return GlobalResponse.success(map);
     }
 }

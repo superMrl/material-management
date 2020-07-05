@@ -32,8 +32,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         final String returnTypeName = returnType.getParameterType().getName();
-        return !"com.jckj.materialmanagement.config.response.GlobalResponse".equals(returnTypeName)
-                && !"org.springframework.http.ResponseEntity".equals(returnTypeName);
+        return !"org.springframework.http.ResponseEntity".equals(returnTypeName);
     }
 
     /**
@@ -54,10 +53,10 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
         if ("void".equals(returnTypeName)) {
             return GlobalResponse.success(null);
         }
-        if (!selectContentType.includes(MediaType.APPLICATION_JSON)) {
+        if ("com.jckj.materialmanagement.config.response.GlobalResponse".equals(returnTypeName)) {
             return body;
         }
-        if ("com.jckj.materialmanagement.config.response.GlobalResponse".equals(returnTypeName)) {
+        if (!selectContentType.includes(MediaType.APPLICATION_JSON)) {
             return body;
         }
         return GlobalResponse.success(body);
@@ -67,17 +66,17 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({BusinessException.class})
-    public <T> GlobalResponse<T> handleException(BusinessException e){
+    public <T> GlobalResponse<T> handleException(BusinessException e) {
         log.error(Throwables.getStackTraceAsString(e));
-        return GlobalResponse.fail(e.getCode(),e.getMessage());
+        return GlobalResponse.fail(e.getCode(), e.getMessage());
     }
 
     //统一异常处理
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({Throwable.class})
-    public <T> GlobalResponse<T> handleThrowable(Throwable e){
+    public <T> GlobalResponse<T> handleThrowable(Throwable e) {
         log.error(Throwables.getStackTraceAsString(e));
-        return GlobalResponse.fail(Throwables.getStackTraceAsString(e),null);
+        return GlobalResponse.fail(Throwables.getStackTraceAsString(e), null);
     }
 }
