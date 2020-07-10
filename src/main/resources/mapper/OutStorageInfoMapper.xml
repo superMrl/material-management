@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.materialmanagement.mapper.OutStorageInfoMapper">
+    <select id="selectTodayOutStore" resultType="com.jckj.materialmanagement.model.InStorageInfo">
+        SELECT * FROM `m_out_storage_info` WHERE OUT_TIME &gt;=#{outTime}
+    </select>
+</mapper>

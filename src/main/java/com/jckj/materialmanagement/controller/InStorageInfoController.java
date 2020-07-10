@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ import java.util.List;
 @RequestMapping("/inStorageInfo")
 public class InStorageInfoController {
 
-    @Autowired
+    @Resource
     private InStorageInfoService inStorageInfoService;
 
     @ApiOperation(value = "批量保存入库详情", httpMethod = "POST")

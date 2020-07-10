@@ -1,30 +1,31 @@
 package com.jckj.materialmanagement.model;
 
-import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 入库表
+ * 出库表
  * </p>
  *
  * @author 
- * @since 2020-07-01
+ * @since 2020-07-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("m_in_storage_info")
-@ApiModel(value="InStorageInfo对象", description="入库表")
-public class InStorageInfo implements Serializable {
+@TableName("m_out_storage_info")
+@ApiModel(value="OutStorageInfo对象", description="出库表")
+public class OutStorageInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,9 +33,9 @@ public class InStorageInfo implements Serializable {
     @TableId(value = "ID", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "主键(入库单号 RKD+时间戳截)")
-    @TableField("IN_PAGE_NO")
-    private String inPageNo;
+    @ApiModelProperty(value = "主键(出库单号 CKD+时间戳截)")
+    @TableField("OUT_PAGE_NO")
+    private String outPageNo;
 
     @ApiModelProperty(value = "物资编码(物资表的主键)")
     @TableField("MATERIAL_SERIAL_NO")
@@ -64,19 +65,25 @@ public class InStorageInfo implements Serializable {
     @TableField("SPECIFICATION")
     private String specification;
 
-    @ApiModelProperty(value = "入库价格")
-    @TableField("INSTORE_PRICE")
-    private BigDecimal instorePrice;
+    @ApiModelProperty(value = "出库价格")
+    @TableField("OUT_PRICE")
+    private BigDecimal outPrice;
 
-    @ApiModelProperty(value = "入库数量")
-    @TableField("IN_AMOUNT")
-    private BigDecimal inAmount;
+    @ApiModelProperty(value = "出库数量")
+    @TableField("OUT_AMOUNT")
+    private BigDecimal outAmount;
 
-    @ApiModelProperty(value = "入库时间")
-    @TableField("INSERT_TIME")
-    private String insertTime;
+    @ApiModelProperty(value = "出库时间")
+    @TableField("OUT_TIME")
+    private String outTime;
+
+    @ApiModelProperty(value = "记录减少库存的入库单号")
+    @TableField("RESOURSE_NO")
+    private String resourseNo;
 
     @ApiModelProperty(value = "商户id")
     @TableField("COMPANY_ID")
     private Long companyId;
+
+
 }
