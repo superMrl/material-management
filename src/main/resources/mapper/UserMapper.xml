@@ -3,7 +3,7 @@
 <mapper namespace="com.jckj.materialmanagement.mapper.UserMapper">
 
     <select id="selectByTelephone" resultType="com.jckj.materialmanagement.model.User">
-        select ID,USER_NAME,TEL_PHONE,USER_ACCOUNT,USER_PASSWORD FROM m_user where TEL_PHONE = #{telPhone} AND ACTION != 2 ;
+        select ID,USER_NAME,TEL_PHONE,USER_ACCOUNT,USER_PASSWORD,COMPANY_ID FROM m_user where TEL_PHONE = #{telPhone} AND ACTION != 2 ;
     </select>
     <select id="selectLoginUserByTp" resultType="com.jckj.materialmanagement.model.User">
         select ID,USER_NAME,TEL_PHONE,USER_ACCOUNT FROM m_user where TEL_PHONE = #{telPhone} AND ACTION != 2 AND USER_PASSWORD = #{userPassword}

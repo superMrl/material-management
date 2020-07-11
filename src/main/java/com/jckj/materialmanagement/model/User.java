@@ -53,6 +53,10 @@ public class User implements UserDetails {
     @TableField("ACTION")
     private Integer action;
 
+    @ApiModelProperty(value = "所属公司id")
+    @TableField("COMPANY_ID")
+    private Integer companyId;
+
 
     //security存储权限认证用的
     private Collection<? extends GrantedAuthority> authorities;
@@ -171,5 +175,13 @@ public class User implements UserDetails {
 
     public void setAction(Integer action) {
         this.action = action;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 }

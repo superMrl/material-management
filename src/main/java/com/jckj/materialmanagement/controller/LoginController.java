@@ -77,6 +77,7 @@ public class LoginController {
             JSONObject u = new JSONObject();
             u.put("userName",user.getUserName());
             u.put("telPhone",user.getTelPhone());
+            u.put("companyId",user.getCompanyId());
 
             JSONObject json = new JSONObject();
             json.put("token",uuid);

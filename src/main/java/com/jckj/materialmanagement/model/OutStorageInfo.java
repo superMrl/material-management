@@ -45,10 +45,6 @@ public class OutStorageInfo implements Serializable {
     @TableField("MATERIAL_NAME")
     private String materialName;
 
-    @ApiModelProperty(value = "分类(对应字典表的主键)")
-    @TableField("CLASSIFY")
-    private String classify;
-
     @ApiModelProperty(value = "生产厂家")
     @TableField("MANUFACTURE_NAME")
     private String manufactureName;
@@ -60,10 +56,6 @@ public class OutStorageInfo implements Serializable {
     @ApiModelProperty(value = "供应商名称")
     @TableField("SUPPLYER_NAME")
     private String supplyerName;
-
-    @ApiModelProperty(value = "规格")
-    @TableField("SPECIFICATION")
-    private String specification;
 
     @ApiModelProperty(value = "出库价格")
     @TableField("OUT_PRICE")
@@ -84,6 +76,10 @@ public class OutStorageInfo implements Serializable {
     @ApiModelProperty(value = "商户id")
     @TableField("COMPANY_ID")
     private Long companyId;
+
+    @ApiModelProperty(value = "出库人名称")
+    @TableField("USER_NAME")
+    private String userName;
 
 
 }
