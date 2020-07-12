@@ -6,7 +6,6 @@ import com.jckj.materialmanagement.model.InStorageInfo;
 import com.jckj.materialmanagement.service.InStorageInfoService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -41,6 +41,12 @@ public class InStorageInfoController {
     @RequestMapping("/selectTodayInStore")
     public List<InStorageInfo> selectTodayInStore() {
         return inStorageInfoService.selectTodayInStore();
+    }
+
+    @ApiOperation(value = "根据条件获取入库信息", httpMethod = "POST")
+    @RequestMapping("/selectInStoreInfoByParams")
+    public List<InStorageInfo> selectInStoreInfoByParams(@RequestBody Map<String,Object> paramMap) {
+        return inStorageInfoService.selectInStoreInfoByParams(paramMap);
     }
 
 }

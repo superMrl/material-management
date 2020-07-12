@@ -32,16 +32,18 @@ public class OutStorageInfoServiceImpl extends ServiceImpl<OutStorageInfoMapper,
     @Override
     public GlobalResponse saveBatch(String param) {
         List<OutStorageInfo> outStorageInfoList = JSONArray.parseArray(param, OutStorageInfo.class);
+        //TODO 获取出库信息的库存信息,不够出库的直接返回提示信息.够出库的减少库存
         for (OutStorageInfo outStorageInfo : outStorageInfoList) {
+
             String timeId = IdWorker.getMillisecond();
             outStorageInfo.setOutPageNo(timeId);
 //            inStorageInfo.setInsertTime(LocalDateTime.now());
         }
         boolean flag = this.saveBatch(outStorageInfoList);
         if(!flag){
-            throw new BusinessException(ErrorCode.INSTORE_SAVE_FAIL);
+            throw new BusinessException(ErrorCode.OUT_SAVE_FAIL);
         }
-        return  GlobalResponse.success(ErrorCode.INSTORE_SAVE_SUCCESS);
+        return  GlobalResponse.success(ErrorCode.OUT_SAVE_SUCCESS);
     }
 
     @Override

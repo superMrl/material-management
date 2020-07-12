@@ -5,6 +5,7 @@ import com.jckj.materialmanagement.model.InStorageInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +20,6 @@ public interface InStorageInfoService extends IService<InStorageInfo> {
     GlobalResponse saveBatch(String param);
 
     List<InStorageInfo> selectTodayInStore();
+
+    List<InStorageInfo> selectInStoreInfoByParams(Map<String, Object> paramMap);
 }

@@ -6,4 +6,25 @@
         SELECT * FROM `m_in_storage_info` WHERE INSERT_TIME &gt;=#{insertTime}
     </select>
 
+    <select id="selectInStoreInfoByParams"
+            resultType="com.jckj.materialmanagement.model.InStorageInfo"
+            parameterType="java.util.Map">
+        SELECT * FROM `m_in_storage_info`
+        <where>
+            <if test="materialName!=null and materialName!=''">
+                MATERIAL_NAME = #{materialName}
+            </if>
+            <if test="inPageNo!=null and inPageNo!=''">
+                IN_PAGE_NO = #{inPageNo}
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                INSERT_TIME &gt;= #{startDate}
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                INSERT_TIME &lt;= #{endDate}
+            </if>
+        </where>
+        order  by INSERT_TIME
+    </select>
+
 </mapper>

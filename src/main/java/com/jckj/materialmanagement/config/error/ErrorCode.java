@@ -37,4 +37,8 @@ public class ErrorCode {
     //物资code
 
 
+    //出库code码
+    public static final String OUT_SAVE_SUCCESS = "400";
+    public static final String OUT_SAVE_FAIL = "401";
+
 }

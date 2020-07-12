@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -18,4 +19,6 @@ import java.util.List;
 public interface InStorageInfoMapper extends BaseMapper<InStorageInfo> {
 
     List<InStorageInfo> selectTodayInStore(@Param(value = "insertTime") String insertTime);
+
+    List<InStorageInfo> selectInStoreInfoByParams(@Param(value = "paramMap") Map<String,Object> paramMap);
 }

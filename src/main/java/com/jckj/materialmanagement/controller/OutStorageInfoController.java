@@ -27,13 +27,13 @@ public class OutStorageInfoController {
     @Resource
     private IOutStorageInfoService outStorageInfoService;
 
-    @ApiOperation(value = "批量保存入库详情", httpMethod = "POST")
+    @ApiOperation(value = "批量保存出库详情", httpMethod = "POST")
     @RequestMapping("/saveBatch")
     public GlobalResponse saveBatch(@RequestBody String param) {
         return outStorageInfoService.saveBatch(param);
     }
 
-    @ApiOperation(value = "获取入库详情", httpMethod = "POST")
+    @ApiOperation(value = "获取今日出库详情", httpMethod = "POST")
     @RequestMapping("/selectTodayOutStore")
     public List<OutStorageInfo> selectTodayOutStore() {
         return outStorageInfoService.selectTodayInStore();

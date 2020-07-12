@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -45,6 +46,7 @@ public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, I
         if(!flag){
             throw new BusinessException(ErrorCode.INSTORE_SAVE_FAIL);
         }
+        //TODO 如果库存表该药品条目已经存在,直接涨库存.否则新建条目
         return  GlobalResponse.success(ErrorCode.INSTORE_SAVE_SUCCESS);
     }
 
@@ -53,5 +55,10 @@ public class InStorageInfoServiceImpl extends ServiceImpl<InStorageInfoMapper, I
 
         String insertTime = DateUtils.formatDateToDB(DateUtils.parseMinTimeForDate(DateUtils.getCurrentDay()).toString(), DateUtils.TIME_REQ_PATTERN, DateUtils.TIME_DB_PATTERN);
         return inStorageInfoMapper.selectTodayInStore(insertTime);
+    }
+
+    @Override
+    public List<InStorageInfo> selectInStoreInfoByParams(Map<String, Object> paramMap) {
+        return inStorageInfoMapper.selectInStoreInfoByParams(paramMap);
     }
 }
